@@ -1,0 +1,39 @@
+{
+  "name": "tune-composer",
+  "version": "1.0.0",
+  "description": "A few years ago I came up with a way to store audio in an extremely small format. There was a lot of limitations, but it was still great for what I was doing at the time.",
+  "main": "index.js",
+  "scripts": {
+    "package-js": "browserify src/js/index.js -t [ babelify --presets [ latest ] ] | uglifyjs > app/js/main.js",
+    "package-js:watch": "watchify src/js/index.js -t [ babelify --presets [ latest ] ] -o app/js/main.js -v",
+    "package-css": "node-sass src/scss/style.scss app/css/style.css",
+    "package-css:watch": "node-sass src/scss/style.scss app/css/style.css -w",
+    "browse": "browser-sync start --server 'app' --files 'app'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyberlane/tune-composer.git"
+  },
+  "author": "Justin Nel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cyberlane/tune-composer/issues"
+  },
+  "homepage": "https://github.com/Cyberlane/tune-composer#readme",
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.8",
+    "browserify": "^14.1.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "node-sass": "^4.5.0",
+    "uglify-js": "^2.7.5",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "tone": "^0.9.0"
+  }
+}
