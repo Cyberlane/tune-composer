@@ -8,8 +8,9 @@ export const cleanTuneData = data => data
 
 export const convertTuneToNotes = (tune) => {
   const segments = /NOTE\(T_(\w+), (\d)\)/g.exec(tune);
-  return {
+  const note = {
     note: toneMap[segments[1]],
     duration: Number(durationMap[segments[2]]) / 50,
   };
+  return note;
 };
