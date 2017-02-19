@@ -4,11 +4,14 @@
   "description": "A few years ago I came up with a way to store audio in an extremely small format. There was a lot of limitations, but it was still great for what I was doing at the time.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "package-js": "browserify src/js/index.js -t [ babelify --presets [ latest ] ] | uglifyjs > app/js/main.js",
     "package-js:watch": "watchify src/js/index.js -t [ babelify --presets [ latest ] ] -o app/js/main.js -v",
     "package-css": "node-sass src/scss/style.scss app/css/style.css",
     "package-css:watch": "node-sass src/scss/style.scss app/css/style.css -w",
-    "browse": "browser-sync start --server 'app' --files 'app'"
+    "browse": "browser-sync start --server 'app' --files 'app'",
+    "build": "npm run package-js && npm run package-css",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -34,6 +37,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
+    "express": "^4.14.1",
     "tone": "^0.9.0"
   }
 }
