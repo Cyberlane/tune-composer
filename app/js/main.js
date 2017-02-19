@@ -22379,7 +22379,7 @@ var _tone2 = _interopRequireDefault(_tone);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var playNote = function playNote(instrument, note, duration, delay) {
-  _tone2.default.Transport.schedule(function (time) {
+  _tone2.default.Transport.scheduleOnce(function (time) {
     return instrument.triggerAttackRelease(note, duration, time + delay);
   }, 0);
 };

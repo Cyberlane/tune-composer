@@ -1,7 +1,8 @@
 import Tone from 'tone';
 
 const playNote = (instrument, note, duration, delay) => {
-  Tone.Transport.schedule(time => instrument.triggerAttackRelease(note, duration, time + delay), 0);
+  Tone.Transport.scheduleOnce(time =>
+    instrument.triggerAttackRelease(note, duration, time + delay), 0);
 };
 
 export const playQueuedNotes = totalDuration => new Promise((r) => {
