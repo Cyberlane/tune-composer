@@ -11,7 +11,7 @@
     "package-css:watch": "node-sass src/scss/style.scss app/css/style.css -w",
     "browse": "browser-sync start --server 'app' --files 'app'",
     "build": "npm run package-js && npm run package-css",
-    "postinstall": "npm install --dev && npm run build"
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "6.3.1"
