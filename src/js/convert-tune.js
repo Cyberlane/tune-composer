@@ -7,10 +7,13 @@ export const cleanTuneData = data => data
   .split('\n');
 
 export const convertTuneToNotes = (tune) => {
-  const segments = /NOTE\(T_(\w+), (\d)\)/g.exec(tune);
+  const [, toneIndex, durationIndex] = /NOTE\(T_(\w+), (\d)\)/g.exec(tune) || [];
+  if (!toneIndex) {
+    return null;
+  }
   const note = {
-    note: toneMap[segments[1]],
-    duration: Number(durationMap[segments[2]]) / 50,
+    note: toneMap[toneIndex],
+    duration: Number(durationMap[durationIndex]) / 50,
   };
   return note;
 };

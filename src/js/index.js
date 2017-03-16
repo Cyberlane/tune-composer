@@ -1,4 +1,6 @@
 import Tone from 'tone';
+import CodeMirror from 'codemirror';
+import codeStyle from './code-style';
 import { createOption } from './dom-helper';
 import {
   playTune,
@@ -6,31 +8,39 @@ import {
   loadTune,
   tuneList,
   tuneData,
-  convertedData,
 } from './dom-elements';
 import { cleanTuneData, convertTuneToNotes } from './convert-tune';
 import { playQueuedNotes, queueNotesForPlay } from './play-queue';
 import * as tunes from './tunes';
 
+codeStyle(CodeMirror);
+
 const synth = new Tone.MonoSynth().toMaster();
+
+const codeMirror = CodeMirror.fromTextArea(tuneData, {
+  mode: 'justin',
+  lineNumbers: true,
+  scrollbarStyle: 'native',
+});
+codeMirror.setSize('100%', '100%');
+codeMirror.setValue(tunes.mario.replace(/^ +/gm, ''));
 
 const playTuneClick = () => {
   playTune.setAttribute('disabled', 'disabled');
-  const notes = cleanTuneData(tuneData.value)
-    .map(convertTuneToNotes);
-  const { totalDuration, log } = queueNotesForPlay(synth, notes);
-  convertedData.value = log;
+  const notes = cleanTuneData(codeMirror.getValue())
+    .map(convertTuneToNotes)
+    .filter(Boolean);
+  const { totalDuration } = queueNotesForPlay(synth, notes);
   playQueuedNotes(totalDuration)
     .then(() => playTune.removeAttribute('disabled'));
 };
 
 const clearClick = () => {
-  tuneData.value = '';
-  convertedData.value = '';
+  codeMirror.setValue('');
 };
 
 const loadTuneClick = () => {
-  tuneData.value = tunes[tuneList.options[tuneList.selectedIndex].value];
+  codeMirror.setValue(tunes[tuneList.options[tuneList.selectedIndex].value].replace(/^ +/gm, ''));
 };
 
 playTune.addEventListener('click', playTuneClick, false);

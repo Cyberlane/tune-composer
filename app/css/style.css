@@ -1,4 +1,20 @@
 @import url(libs/purecss.min.css);
+@import url(libs/codemirror.css);
 .tune-area {
   width: 100%;
   height: 250px; }
+
+.cm-note {
+  color: dodgerblue; }
+
+.cm-end-marker {
+  color: deepskyblue; }
+
+.cm-tone {
+  color: mediumseagreen; }
+
+.cm-duration {
+  color: rebeccapurple; }
+
+.cm-error {
+  color: darkred; }
