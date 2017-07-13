@@ -13,9 +13,6 @@
     "build": "npm run package-js && npm run package-css",
     "postinstall": "npm run build"
   },
-  "engines": {
-    "node": "6.3.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Cyberlane/tune-composer.git"
